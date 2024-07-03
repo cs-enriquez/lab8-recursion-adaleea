@@ -8,14 +8,26 @@ using namespace std;
 //          lineOfStars(0) returns ""
 // You may not use a loop.
 string lineOfStars(int n) {
-	return "fixme";
+	if(n==0){
+		return "";
+	}
+	else{
+		cout << "*";
+		return "*" + lineOfStars(n-1);
+	}
 }
 
 // Write a function power() that will
 //    compute the x to the power of n recursively
 // if the power is invalid, return 0
 float power(float x, int n) {
-	return -1;	
+	if(n==0){ //base
+		return 1;
+	}
+	else if(n<0){ // invalid
+		return 0; 
+	}
+	return x * power(x, n-1);	
 }
 
 /*
@@ -35,7 +47,24 @@ should display:
 ****
 
 */
-void stars(int n) {}
+void lineOfStarss(int n){
+	if(n>0){
+		cout << "*";
+		lineOfStars(n-1);
+	}
+}
+void stars(int n) {
+	if (n>0){
+		lineOfStarss(n);
+		cout << endl;
+		stars(n-1);
+	}
+	else if(n>1){
+		stars(n-1);
+		lineOfStarss(n);
+		cout << endl;
+	}
+}
 
 // Write a *recursive* function that will check if
 //    a string is a palindrome
@@ -43,7 +72,13 @@ void stars(int n) {}
 // Hint 2: s.substr(i,j) gives you the substring of s. For example if s = Hello, s(1,s.length()-1) gives you ello
 bool isPalindromeR(string s)
 {
-	return false;
+	if (s.length() <=1){ //base
+		return true;
+	}
+	if(s.front() != s.back()){
+		return false;
+	}
+	return isPalindromeR(s.substr(1, s.length()-2));
 }
 
 
@@ -52,5 +87,8 @@ bool isPalindromeR(string s)
 //  methods from the previous function
 string reverse(string s)
 {
-	return "fixme"; 
+	if(s.empty()||s.size()==1){ //base
+		return s;
+	} 
+	return s.back()+reverse(s.substr(0,s.size()-1));
 }
